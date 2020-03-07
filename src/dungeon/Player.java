@@ -1,6 +1,6 @@
 package dungeon;
 
-public class Player implements Moves{
+public class Player implements Moves {
 
     private int x;
     private int y;
@@ -21,8 +21,8 @@ public class Player implements Moves{
 
 
     @Override
-    public void move(char button) {
-        switch (button){
+    public void move(char key) {
+        switch (key) {
             case 'w':
                 y--;
                 break;
@@ -35,14 +35,13 @@ public class Player implements Moves{
             case 'a':
                 x--;
                 break;
-                //TODO handle invalid input
+            //TODO handle invalid input
         }
     }
 
     public String coordinatesToString() {
         return "P: " + getY() + "," + getX();
     }
-
 
 
 }

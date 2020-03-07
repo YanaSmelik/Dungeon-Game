@@ -2,7 +2,7 @@ package dungeon;
 
 public interface Moves {
 
-    void move(char button);
+    void move(char key);
 
 
 }
