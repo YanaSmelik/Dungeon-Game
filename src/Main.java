@@ -3,7 +3,8 @@ import dungeon.Dungeon;
 public class Main {
     public static void main(String[] args) {
         Dungeon dungeon = new Dungeon(10, 5, 5, 4, true);
-        dungeon.run();
+        dungeon.testMove();
+        dungeon.printCurrentFieldSituation();
     }
 
 
@@ -18,14 +19,14 @@ public class Main {
     //GAME:
     /*
     - The player is in a dungeon full of vampires.
-    - The player has to destroy the vampires before his lamp runs out of battery
+    - The player has to destroy the vampires before his lamp runs out of battery (i.e. number of moves)
     - The player can see the vampires with a blinking of their lump. after which they have to move blind before the
       following blinking.
     - With one move, the player can walk as many steps he wants.
      */
 
     /*
-    - The dungeons, the player and the vampires are shown in text form. (Player - P, Vampires - V, Dungon - -)
+    - The dungeons, the player and the vampires are shown in text form. (Player - P, Vampires - V, Dungeon - -)
     - The first line in the printout tells how many moves the player has left (how much battery the lamp has)
     - After that the print output shows player and vampire positions, which are followed by the game map.
      */

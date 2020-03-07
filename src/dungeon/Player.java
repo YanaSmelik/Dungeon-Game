@@ -1,18 +1,48 @@
 package dungeon;
 
-public class Player {
+public class Player implements Moves{
 
-    private Coordintes coordinates;
+    private int x;
+    private int y;
 
-    public Player (){
-        coordinates = new Coordintes(0, 0); //set initial coordinates to the top left corner;
+    public Player() {
+        this.x = 0; //horizontal coordinate
+        this.y = 0; //vertical coordinate
     }
 
 
-
-
-    public String coordinatesToString(){
-        return "P " + coordinates.getX() + " " + coordinates.getY();
+    public int getX() {
+        return x;
     }
+
+    public int getY() {
+        return y;
+    }
+
+
+    @Override
+    public void move(char button) {
+        switch (button){
+            case 'w':
+                y--;
+                break;
+            case 'd':
+                x++;
+                break;
+            case 's':
+                y++;
+                break;
+            case 'a':
+                x--;
+                break;
+                //TODO handle invalid input
+        }
+    }
+
+    public String coordinatesToString() {
+        return "P: " + getY() + "," + getX();
+    }
+
+
 
 }
