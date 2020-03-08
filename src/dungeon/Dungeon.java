@@ -56,7 +56,7 @@ public class Dungeon {
         moves = command.toCharArray(); //convert user's command(s) to array of chars (keys);
         for (int i = 0; i < moves.length; i++) { // change Player's coordinates accordingly
             player.move(moves[i]);
-            vampire.move(vampire.randomMove());
+            vampire.move();
         }
     }
 

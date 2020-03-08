@@ -1,11 +1,10 @@
 package dungeon;
 
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Vampire implements Moves{
+public class Vampire extends Coordinates{
 
-
+    private Coordinates coordinates;
     /*
      - the vampires move randomly in the game
     - vampires take one step for each step the player takes
@@ -14,58 +13,37 @@ public class Vampire implements Moves{
     - when all the vampires are destroyed, the game ends and it prints YOU WON.
      */
 
-
-    private int x;
-    private int y;
-
-
     public Vampire(){
-        x = randomCoordinate(10); //set random number for the initial position. method parameter - field width;
-        y = randomCoordinate(5); //set random number for the initial position. method parameter - field height;
+        super();
+        coordinates = new Coordinates();
+        coordinates.setX(randomCoordinate(10)); //set random number for the initial position. method parameter - field width;
+        coordinates.setY(randomCoordinate(5));  //set random number for the initial position. method parameter - field height;
 
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
 
 
-    private int randomCoordinate(int bound){
+    public int randomCoordinate(int bound){
         //TODO figure out how to get size of the field.
         return ThreadLocalRandom.current().nextInt(bound);
     }
 
 
-    public char randomMove(){
+    public void move() {
+        char key = randomMove();
+        super.move(key);
+    }
+
+
+    //random move for move() method
+    private char randomMove(){
         char[] possibleMoves = {'w', 's', 'd', 'a'};
         return possibleMoves[ThreadLocalRandom.current().nextInt(4)];
     }
 
-    @Override
-    public void move(char key) {
-        switch (key){
-            case 'w':
-                y--;
-                break;
-            case 'd':
-                x++;
-                break;
-            case 's':
-                y++;
-                break;
-            case 'a':
-                x--;
-                break;
-            //TODO handle invalid input
-        }
-    }
 
 
     public String coordinatesToString(){
-        return "V: " + getY() + ", " + getX();
+        return "V: " + super.coordinatesToString();
     }
 }
