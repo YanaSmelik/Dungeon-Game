@@ -2,7 +2,6 @@ package dungeon;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Dungeon {
@@ -10,11 +9,10 @@ public class Dungeon {
     private int length;
     private int height;
     private int moves;
-    private int vampires;
     private boolean vampiresMove;
     private Player player;
     private Scanner reader;
-    private Vampire vampire; //temporary it's only one Vampire
+    private ArrayList<Vampire> vampiresSquad;
 
 
     public Dungeon(int length, int height, int vampires, int moves, boolean vampiresMoves) {
@@ -23,21 +21,23 @@ public class Dungeon {
 
         this.length = length;  // length and height - represent the dimension of the dungeon (always a rectangle);
         this.height = height;
-        this.vampires = vampires;
         this.moves = moves;  // moves - determines the initial number of moves
         this.vampiresMove = vampiresMoves; //if vampiresMoves is false --> the vampires do not move
         this.player = new Player();
         this.reader = new Scanner(System.in); //create one scanner object that will be used multiple times throughout the program
-        vampire = new Vampire();
+        vampiresSquad = new ArrayList<>(vampires);
+        for (int i = 0; i < vampires; i++) {     //add 5 vampires to the vampiresSquad
+            vampiresSquad.add(new Vampire());
+        }
     }
 
 
     //starts the game
     public void run() {
         while (moves >= 0) {
-            System.out.println(player.coordinatesToString()); //print P coordinates;
-            System.out.println(vampire.coordinatesToString());//print V coordinates;
-            printCurrentFieldSituation();                       //print field
+            printPlayersCoordinates(); //print P coordinates;
+            printVampiresCoordinates();//print V coordinates;
+            printCurrentMap();                       //print field
             System.out.println("Moves left: " + moves);  //how many moves left
 
             System.out.print("Your move(s): ");             //ask user for input (command(s))
@@ -47,26 +47,44 @@ public class Dungeon {
 
             moves--;
         }
-
-
     }
+
 
     public void movePlayerAccordingToCommand(String command) {
         char[] moves = new char[command.length()];  //create empty array with size of the command
         moves = command.toCharArray(); //convert user's command(s) to array of chars (keys);
         for (int i = 0; i < moves.length; i++) { // change Player's coordinates accordingly
             player.move(moves[i]);
+            moveSquad(vampiresSquad); //move vampires
+        }
+    }
+
+
+    public void moveSquad(ArrayList<Vampire> squad) {  //move each Vampire in random way
+        for (Vampire vampire : squad) {
             vampire.move();
         }
     }
 
 
-    public void printCurrentFieldSituation() {   //prints player's position on the field
+    public void printVampiresCoordinates() {    //prints coordinates of all vampires
+        for (Vampire vampire : vampiresSquad) {
+            System.out.println(vampire.coordinatesToString());
+        }
+    }
+
+
+    public void printPlayersCoordinates() {
+        System.out.println(player.coordinatesToString());
+    }
+
+
+    public void printCurrentMap() {   //prints player's position on the field
         for (int i = 0; i <= height; i++) {
             for (int j = 0; j <= length; j++) {
                 if (i == player.getY() && j == player.getX()) {
                     System.out.print("P");
-                } else if (i == vampire.getY() && j == vampire.getX()) {
+                } else if (doCoordinatesMatch(j, i)) {
                     System.out.print("V");
                 } else {
                     System.out.print("-");
@@ -74,6 +92,16 @@ public class Dungeon {
             }
             System.out.println();
         }
+    }
+
+
+    public boolean doCoordinatesMatch(int x, int y) {
+        for (Vampire vampire : vampiresSquad) {
+            if (vampire.getX() == x && vampire.getY() == y) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

@@ -7,14 +7,6 @@ public class Main {
     }
 
 
-
-
-    /*
-    create only one Scanner object
-    do not use static variables
-     */
-
-
     //GAME:
     /*
     - The player is in a dungeon full of vampires.
@@ -27,7 +19,7 @@ public class Main {
     /*
     - The dungeons, the player and the vampires are shown in text form. (Player - P, Vampires - V, Dungeon - -)
     - The first line in the printout tells how many moves the player has left (how much battery the lamp has)
-    - After that the print output shows player and vampire positions, which are followed by the game map.
+    - After that the print output shows player and vampire positions, which are followed by the game map (game field).
      */
 
     /*

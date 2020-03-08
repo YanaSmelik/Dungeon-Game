@@ -9,6 +9,7 @@ public class TestVampire {
 
     @Test
     void randomMove() {
+
     }
 
 
@@ -35,6 +36,11 @@ public class TestVampire {
 
     @Test
     void randomXCoordinate() {
+
+    }
+
+    @Test
+    void coordinatesToString() {
 
     }
 
