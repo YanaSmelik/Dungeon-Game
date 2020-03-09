@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c9a22f33-2390-4959-ad4c-d7c39ad5165d" name="Default Changelist" comment="Dungeon class: &#10;  - added ArrayList of vampires to the class variables;&#10;  - in constructor initiated ArrayList and added 5 new Vampires to it. &#10;  - created printPlayersCoordinates and printVampiresCoordinates method to print P and Vs coordinates (with println() inside lower methods).&#10;  - edited movePlayerAccordingToCommand() method to support vampiresSquad ArrayList (instead of one vampire). &#10;  - added moveSquad() method  --&gt; it's move method for the collection of Vampires. &#10;  - renamed printCurrentFieldSituation() to printCurrentMap() and edited it to support Vampires ArrayList (not only one vampire) &#10;  - implemented doCoordinateMath() --&gt; helper method for printCurrentMap(). It returns 'true' if a vampire's coordinates match current. &#10;  &#10;  &#10;Created TestCoordinates class: &#10; - tests for moveS, moveW, moveA, moveD &#10; - and test for coordinatesToString()">
-      <change afterPath="$PROJECT_DIR$/src/dungeon/TestCoordinates.java" afterDir="false" />
+    <list default="true" id="c9a22f33-2390-4959-ad4c-d7c39ad5165d" name="Default Changelist" comment="Changes: &#10;&#10;Dungeon class: &#10;  - length and height class variables are not public static --&gt; to make them accesible from the Coordinates class. &#10;  - refactored movePlayerAccordingToCommand()  --&gt; deleted separate size specification for the new moves array. It's redundant. &#10;  &#10;Vampire class: &#10;  - modified class constructor  --&gt; now it doesn't create additional instance of Coordinates object. &#10;  - the initial x and y coordinates (random) are now set during the calling of super constructor. Whit the help of ThreadLocalRandom.current().nextInt(), which takes into account height and width of the map. Thus, randomCoordinate() method become unnecessary. &#10;  &#10;&#10;Coordinates class: &#10;   - added constructor that takes (int x, int y) parameters --&gt; to make possible for Vampire set random coordinates; &#10;   - modified move() --&gt; to take into account map boundaries.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Part 2. Exercise 33 - Dungeon/dungeon/Dungeon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Part 2. Exercise 33 - Dungeon/dungeon/Dungeon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Part 2. Exercise 33 - Dungeon/dungeon/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Part 2. Exercise 33 - Dungeon/dungeon/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Part 2. Exercise 33 - Dungeon/dungeon/Vampire.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Part 2. Exercise 33 - Dungeon/dungeon/Vampire.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dungeon/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dungeon/Coordinates.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dungeon/Dungeon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dungeon/Dungeon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dungeon/TestVampire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dungeon/TestVampire.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dungeon/Vampire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dungeon/Vampire.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -158,24 +155,32 @@
       <option name="project" value="LOCAL" />
       <updated>1583685338939</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Dungeon class: &#10;  - added ArrayList of vampires to the class variables;&#10;  - in constructor initiated ArrayList and added 5 new Vampires to it. &#10;  - created printPlayersCoordinates and printVampiresCoordinates method to print P and Vs coordinates (with println() inside lower methods).&#10;  - edited movePlayerAccordingToCommand() method to support vampiresSquad ArrayList (instead of one vampire). &#10;  - added moveSquad() method  --&gt; it's move method for the collection of Vampires. &#10;  - renamed printCurrentFieldSituation() to printCurrentMap() and edited it to support Vampires ArrayList (not only one vampire) &#10;  - implemented doCoordinateMath() --&gt; helper method for printCurrentMap(). It returns 'true' if a vampire's coordinates match current. &#10;  &#10;  &#10;Created TestCoordinates class: &#10; - tests for moveS, moveW, moveA, moveD &#10; - and test for coordinatesToString()">
+      <created>1583689037503</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1583689037503</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes: &#10;- added Scanner to Dungeon class; &#10;- some TODOs &#10;- temporary testMove() method for testing move() method in Player class. (--&gt; modify and add to the Test class. Read Test TODO in method() Test) &#10;- temporary printCurrentFieldSituation() method to print players position on a field;&#10;&#10;- added Moves interface. It has move method (tbd, whether to keep it or not) &#10;- Player class implemented Moves interface; &#10;- Deleted Coordinates class. Moved x and y to the Player class &#10;- added getters to the Player class. (it has x and y int variables)&#10;- overrode move(char button) method, to move player (s, w, d, a) &#10;- changed coordinatesToString() method, so now, y coordinated goes firs (better px). &#10;&#10;- added Junit 5&#10;- created Tests class (still need to decide the whole structure of unit test)" />
     <MESSAGE value="Dungeon: &#10; - added Vampire variable (for now it's only one) &#10; - modified run() : now it prints P and V coordinates, how many moves are left, asks for user's input and moves P and V accordingly; &#10; - modified movePlayerAccordingToCommand() : now for each P move it also moves V. &#10; - modified printCurrentFieldSituation() : now it prints V as well. &#10; &#10; &#10; Player: &#10;  - changed parameter name from 'button' to 'key'.&#10;  &#10;  &#10;Vampire: &#10;  - class implements Moves interface; &#10;  - constructor set random coordinates (x and y) for the vampire in the range of set boundaries; (TODO: how to get field size to set it as boundaries )&#10;  - getters for X and Y;&#10;  - private randomCoordinate method returns int. To set as one coordinate. &#10;  - randomMove() method return random move. //TOD: Do I need it? It can be a part of move() method, but then i cannot override it, because it needs parameter. --&gt; Do I need the Moves interface then? TBD) &#10;  - overrode move() method. The same as in Player class. &#10;  - coordinatesToString() : prints V coordinates; &#10;  &#10;  &#10;Test__ Classes. &#10; - Test file for each class. &#10; - TODO implement unit tests." />
     <MESSAGE value="Implemented Coordinates class (instead of Moves interface): &#10; - it has x and y coordinates int variables;&#10; - default constructor (Player has 0,0 as initial Coordinates, so it's okay for now) &#10; - getters and setters for x and y;&#10; - move() method  --&gt; moved it to the Coordinates class (parent class), Player and Vampire can implement and override or overload it. &#10; - coordinatesToString()  --&gt; also moved this method into parent class, to be able to override it in the child classes. &#10; &#10; &#10; Player class (extends Coordinates): &#10;   - removed x and y variables ( they are now in parent - Coordinates class) &#10;   - move() method is now overrode from parent class &#10;   - coordinatesToString()  --&gt; also overrode from parent class &#10;   &#10;   &#10; Vampire class (extends Coordinates): &#10;   - constructor sets x and y variables with the help of randomCoordinate() method;&#10;   - move() overloaded(?) from prent class; &#10;   - coordinatesToString() --&gt; overrode from parent class.  &#10;   &#10;   &#10; TestPlayer: &#10;   - added moveS, moveW, moveA, moveD tests; &#10;   - added coordinatesToString() test;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Coordinates class (instead of Moves interface): &#10; - it has x and y coordinates int variables;&#10; - default constructor (Player has 0,0 as initial Coordinates, so it's okay for now) &#10; - getters and setters for x and y;&#10; - move() method  --&gt; moved it to the Coordinates class (parent class), Player and Vampire can implement and override or overload it. &#10; - coordinatesToString()  --&gt; also moved this method into parent class, to be able to override it in the child classes. &#10; &#10; &#10; Player class (extends Coordinates): &#10;   - removed x and y variables ( they are now in parent - Coordinates class) &#10;   - move() method is now overrode from parent class &#10;   - coordinatesToString()  --&gt; also overrode from parent class &#10;   &#10;   &#10; Vampire class (extends Coordinates): &#10;   - constructor sets x and y variables with the help of randomCoordinate() method;&#10;   - move() overloaded(?) from prent class; &#10;   - coordinatesToString() --&gt; overrode from parent class.  &#10;   &#10;   &#10; TestPlayer: &#10;   - added moveS, moveW, moveA, moveD tests; &#10;   - added coordinatesToString() test;" />
+    <MESSAGE value="Dungeon class: &#10;  - added ArrayList of vampires to the class variables;&#10;  - in constructor initiated ArrayList and added 5 new Vampires to it. &#10;  - created printPlayersCoordinates and printVampiresCoordinates method to print P and Vs coordinates (with println() inside lower methods).&#10;  - edited movePlayerAccordingToCommand() method to support vampiresSquad ArrayList (instead of one vampire). &#10;  - added moveSquad() method  --&gt; it's move method for the collection of Vampires. &#10;  - renamed printCurrentFieldSituation() to printCurrentMap() and edited it to support Vampires ArrayList (not only one vampire) &#10;  - implemented doCoordinateMath() --&gt; helper method for printCurrentMap(). It returns 'true' if a vampire's coordinates match current. &#10;  &#10;  &#10;Created TestCoordinates class: &#10; - tests for moveS, moveW, moveA, moveD &#10; - and test for coordinatesToString()" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dungeon class: &#10;  - added ArrayList of vampires to the class variables;&#10;  - in constructor initiated ArrayList and added 5 new Vampires to it. &#10;  - created printPlayersCoordinates and printVampiresCoordinates method to print P and Vs coordinates (with println() inside lower methods).&#10;  - edited movePlayerAccordingToCommand() method to support vampiresSquad ArrayList (instead of one vampire). &#10;  - added moveSquad() method  --&gt; it's move method for the collection of Vampires. &#10;  - renamed printCurrentFieldSituation() to printCurrentMap() and edited it to support Vampires ArrayList (not only one vampire) &#10;  - implemented doCoordinateMath() --&gt; helper method for printCurrentMap(). It returns 'true' if a vampire's coordinates match current. &#10;  &#10;  &#10;Created TestCoordinates class: &#10; - tests for moveS, moveW, moveA, moveD &#10; - and test for coordinatesToString()" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="238" width="816" height="729" key="#Intentions" timestamp="1583682386926">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="552" y="238" width="816" height="729" key="#Intentions/0.0.1920.1160@0.0.1920.1160" timestamp="1583682386926" />
-    <state x="765" y="281" key="#com.intellij.ide.util.MemberChooser" timestamp="1583683580956">
+    <state x="765" y="281" key="#com.intellij.ide.util.MemberChooser" timestamp="1583765084377">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="765" y="281" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1160@0.0.1920.1160" timestamp="1583683580956" />
+    <state x="765" y="281" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1160@0.0.1920.1160" timestamp="1583765084377" />
     <state x="790" y="273" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1583587382723">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
@@ -192,54 +197,54 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="690" y="334" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1920.1160@0.0.1920.1160" timestamp="1583587385158" />
-    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1583689003407">
+    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1583765072399">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1920.1160@0.0.1920.1160" timestamp="1583689003407" />
+    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1920.1160@0.0.1920.1160" timestamp="1583765072399" />
     <state x="714" y="295" key="DetectedRootsChooserDialog" timestamp="1583587079042">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="714" y="295" key="DetectedRootsChooserDialog/0.0.1920.1160@0.0.1920.1160" timestamp="1583587079042" />
-    <state x="184" y="98" key="DiffContextDialog" timestamp="1583689002468">
+    <state x="184" y="98" key="DiffContextDialog" timestamp="1583765070379">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="184" y="98" key="DiffContextDialog/0.0.1920.1160@0.0.1920.1160" timestamp="1583689002468" />
+    <state x="184" y="98" key="DiffContextDialog/0.0.1920.1160@0.0.1920.1160" timestamp="1583765070379" />
     <state x="740" y="334" key="FileChooserDialogImpl" timestamp="1583587380093">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="740" y="334" key="FileChooserDialogImpl/0.0.1920.1160@0.0.1920.1160" timestamp="1583587380093" />
-    <state width="1877" height="575" key="GridCell.Tab.0.bottom" timestamp="1583688489758">
+    <state width="1877" height="575" key="GridCell.Tab.0.bottom" timestamp="1583764620212">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="575" key="GridCell.Tab.0.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1583688489758" />
-    <state width="1877" height="575" key="GridCell.Tab.0.center" timestamp="1583688489758">
+    <state width="1877" height="575" key="GridCell.Tab.0.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1583764620212" />
+    <state width="1877" height="575" key="GridCell.Tab.0.center" timestamp="1583764620212">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="575" key="GridCell.Tab.0.center/0.0.1920.1160@0.0.1920.1160" timestamp="1583688489758" />
-    <state width="1877" height="575" key="GridCell.Tab.0.left" timestamp="1583688489758">
+    <state width="1877" height="575" key="GridCell.Tab.0.center/0.0.1920.1160@0.0.1920.1160" timestamp="1583764620212" />
+    <state width="1877" height="575" key="GridCell.Tab.0.left" timestamp="1583764620212">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="575" key="GridCell.Tab.0.left/0.0.1920.1160@0.0.1920.1160" timestamp="1583688489758" />
-    <state width="1877" height="575" key="GridCell.Tab.0.right" timestamp="1583688489758">
+    <state width="1877" height="575" key="GridCell.Tab.0.left/0.0.1920.1160@0.0.1920.1160" timestamp="1583764620212" />
+    <state width="1877" height="575" key="GridCell.Tab.0.right" timestamp="1583764620212">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="575" key="GridCell.Tab.0.right/0.0.1920.1160@0.0.1920.1160" timestamp="1583688489758" />
-    <state width="1877" height="396" key="GridCell.Tab.1.bottom" timestamp="1583684567310">
+    <state width="1877" height="575" key="GridCell.Tab.0.right/0.0.1920.1160@0.0.1920.1160" timestamp="1583764620212" />
+    <state width="1877" height="396" key="GridCell.Tab.1.bottom" timestamp="1583764323491">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="396" key="GridCell.Tab.1.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1583684567310" />
-    <state width="1877" height="396" key="GridCell.Tab.1.center" timestamp="1583684567309">
+    <state width="1877" height="396" key="GridCell.Tab.1.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1583764323491" />
+    <state width="1877" height="396" key="GridCell.Tab.1.center" timestamp="1583764323491">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="396" key="GridCell.Tab.1.center/0.0.1920.1160@0.0.1920.1160" timestamp="1583684567309" />
-    <state width="1877" height="396" key="GridCell.Tab.1.left" timestamp="1583684567309">
+    <state width="1877" height="396" key="GridCell.Tab.1.center/0.0.1920.1160@0.0.1920.1160" timestamp="1583764323491" />
+    <state width="1877" height="396" key="GridCell.Tab.1.left" timestamp="1583764323491">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="396" key="GridCell.Tab.1.left/0.0.1920.1160@0.0.1920.1160" timestamp="1583684567309" />
-    <state width="1877" height="396" key="GridCell.Tab.1.right" timestamp="1583684567310">
+    <state width="1877" height="396" key="GridCell.Tab.1.left/0.0.1920.1160@0.0.1920.1160" timestamp="1583764323491" />
+    <state width="1877" height="396" key="GridCell.Tab.1.right" timestamp="1583764323491">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="396" key="GridCell.Tab.1.right/0.0.1920.1160@0.0.1920.1160" timestamp="1583684567310" />
+    <state width="1877" height="396" key="GridCell.Tab.1.right/0.0.1920.1160@0.0.1920.1160" timestamp="1583764323491" />
     <state x="440" y="154" key="SettingsEditor" timestamp="1583588014329">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>

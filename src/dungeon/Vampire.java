@@ -15,17 +15,8 @@ public class Vampire extends Coordinates {
      */
 
     public Vampire() {
-        super();
-        coordinates = new Coordinates();
-        coordinates.setX(randomCoordinate(10)); //set random number for the initial position. method parameter - field width;
-        coordinates.setY(randomCoordinate(5));  //set random number for the initial position. method parameter - field height;
-
-    }
-
-
-    public int randomCoordinate(int bound) {
-        //TODO figure out how to get size of the field.
-        return ThreadLocalRandom.current().nextInt(bound);
+        //set x and y as random numbers (considering height and length).
+        super(ThreadLocalRandom.current().nextInt(Dungeon.getLength()), ThreadLocalRandom.current().nextInt(Dungeon.getHeight()));
     }
 
 

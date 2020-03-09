@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Dungeon {
 
-    private int length;
-    private int height;
+    public static int length;
+    public static int height;
     private int moves;
     private boolean vampiresMove;
     private Player player;
@@ -51,14 +51,20 @@ public class Dungeon {
 
 
     public void movePlayerAccordingToCommand(String command) {
-        char[] moves = new char[command.length()];  //create empty array with size of the command
-        moves = command.toCharArray(); //convert user's command(s) to array of chars (keys);
+        char[] moves = command.toCharArray(); //convert user's command(s) to array of chars (keys);
         for (int i = 0; i < moves.length; i++) { // change Player's coordinates accordingly
             player.move(moves[i]);
             moveSquad(vampiresSquad); //move vampires
         }
     }
 
+    public static int getLength() {
+        return length;
+    }
+
+    public static int getHeight() {
+        return height;
+    }
 
     public void moveSquad(ArrayList<Vampire> squad) {  //move each Vampire in random way
         for (Vampire vampire : squad) {
