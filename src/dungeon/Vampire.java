@@ -29,7 +29,7 @@ public class Vampire extends Coordinates {
     //random move for move() method
     private char randomMove() {
         char[] possibleMoves = {'w', 's', 'd', 'a'};
-        return possibleMoves[ThreadLocalRandom.current().nextInt(4)];
+        return  possibleMoves[ThreadLocalRandom.current().nextInt(4)];
     }
 
 

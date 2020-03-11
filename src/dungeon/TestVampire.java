@@ -2,15 +2,23 @@ package dungeon;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestVampire {
 
+    //move()
+    //randomMove()
+    //coordinatesToString()
 
-    @Test
-    void randomMove() {
 
-    }
+    //TODO: How to test private methods?
+    //TODO: structure of unit tests inside the project. Where should i put them?
+
+
+    //TODO: test for Random with seed.
+
 
 
     @Test

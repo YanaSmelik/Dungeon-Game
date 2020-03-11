@@ -8,8 +8,59 @@ import org.junit.jupiter.api.Test;
 public class TestPlayer {
 
 
+    // *********** move() *********** //
+    // Out of bounds (upper, bottom, left, right)
+
     @Test
-    void moveS() {
+    void playerMoveOutOfUpperBound() {
+        Player player = new Player();
+        Dungeon dungeon = new Dungeon(5, 5, 5, 5, true);
+        player.move('w');
+
+        assertEquals(0, player.getX());
+        assertEquals(0, player.getY());
+    }
+
+    @Test
+    void playerMoveOutOfBottomBound() {
+        Player player = new Player();
+        Dungeon dungeon = new Dungeon(5, 1, 5, 5, true);
+
+        player.move('s');
+        player.move('s');
+
+        assertEquals(0, player.getX());
+        assertEquals(1, player.getY());
+    }
+
+    @Test
+    void playerMoveOutOfLeftBound() {
+        Player player = new Player();
+        Dungeon dungeon = new Dungeon(5, 5, 5, 5, true);
+        player.move('a');
+
+        assertEquals(0, player.getX());
+        assertEquals(0, player.getY());
+    }
+
+    @Test
+    void playerMoveOutOfRightBound() {
+        Player player = new Player();
+        Dungeon dungeon = new Dungeon(1, 5, 5, 5, true);
+        player.move('d');
+        player.move('d');
+
+        assertEquals(1, player.getX());
+        assertEquals(0, player.getY());
+    }
+
+
+
+    // *********** move() *********** //
+    // moves (s, w, a, d) inside the Map. 'happy paths'
+    @Test
+    void playerMoveSIsideMap() {
+        Dungeon dungeon = new Dungeon(5, 5, 5, 5, true);
         Player player = new Player();
         player.move('s');
 
@@ -18,26 +69,34 @@ public class TestPlayer {
     }
 
     @Test
-    void moveW() {
+    void playerMoveWInsideMap() {
         Player player = new Player();
+        Dungeon dungeon = new Dungeon(5, 5, 5, 5, true);
+        player.move('s');
+        player.move('s');
         player.move('w');
 
+
         assertEquals(0, player.getX());
-        assertEquals(-1, player.getY());
+        assertEquals(1, player.getY());
     }
 
     @Test
-    void moveA() {
+    void playerMoveAInsideMap() {
         Player player = new Player();
+        Dungeon dungeon = new Dungeon(5, 5, 5, 5, true);
+        player.move('d');
+        player.move('d');
         player.move('a');
 
-        assertEquals(-1, player.getX());
+        assertEquals(1, player.getX());
         assertEquals(0, player.getY());
     }
 
     @Test
-    void moveD() {
+    void playerMoveDInsideMap() {
         Player player = new Player();
+        Dungeon dungeon = new Dungeon(5, 5, 5, 5, true);
         player.move('d');
 
         assertEquals(1, player.getX());
@@ -45,8 +104,7 @@ public class TestPlayer {
     }
 
 
-    //TODO write tests for invalid moves (negative numbers, exceed borders, letters, special chars, floats)
-    //TODO modify tests, considering field boundaries.
+    //TODO write tests for invalid input (throw exception)
 
 
     @Test

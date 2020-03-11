@@ -35,6 +35,8 @@ public class Dungeon {
     //starts the game
     public void run() {
         while (moves >= 0) {
+
+            //TODO handle case when vampire and Player are both at 0,0 at the beginning
             printPlayersCoordinates(); //print P coordinates;
             printVampiresCoordinates();//print V coordinates;
             printCurrentMap();                       //print field
@@ -42,21 +44,38 @@ public class Dungeon {
 
             System.out.print("Your move(s): ");             //ask user for input (command(s))
             String command = reader.nextLine();
-            movePlayerAccordingToCommand(command);          // move P and V
 
+            movePlayerAccordingToCommand(command); //move player
+            destroyVampire();          //destroy vampire if player run into him.
+            moveVampireAccordingToPlayerMoves(command.length());
 
             moves--;
         }
     }
 
 
+    //TODO change method name - it's too long
     public void movePlayerAccordingToCommand(String command) {
         char[] moves = command.toCharArray(); //convert user's command(s) to array of chars (keys);
         for (int i = 0; i < moves.length; i++) { // change Player's coordinates accordingly
             player.move(moves[i]);
-            moveSquad(vampiresSquad); //move vampires
         }
     }
+
+
+    //TODO change method name - it's too long
+    public void moveVampireAccordingToPlayerMoves(int numberOfPlayerMoves) {
+        int counter = 0;
+        while (counter < numberOfPlayerMoves) {
+            for (Vampire vampire : vampiresSquad) {
+                vampire.move();
+            }
+            counter++;
+        }
+
+    }
+
+
 
     public static int getLength() {
         return length;
@@ -70,6 +89,18 @@ public class Dungeon {
         for (Vampire vampire : squad) {
             vampire.move();
         }
+    }
+
+
+    //if player and vampire run into each other  - the vampire is destroyed
+    public void destroyVampire() {
+        ArrayList<Vampire> vampireToRemove = new ArrayList<>();
+        for (Vampire vampire : vampiresSquad) {
+            if (player.getX() == vampire.getX() && player.getY() == vampire.getY()) {
+                vampireToRemove.add(vampire);
+            }
+        }
+        vampiresSquad.removeAll(vampireToRemove);
     }
 
 

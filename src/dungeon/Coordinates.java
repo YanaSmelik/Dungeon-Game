@@ -25,6 +25,13 @@ public class Coordinates {
     }
 
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 
     //changes coordinates according to movement direction, taking into account map boarders.
     public void move(char key) {
@@ -49,10 +56,10 @@ public class Coordinates {
                     x--;
                 }
                 break;
-            //TODO handle invalid input
         }
     }
-
+    //TODO handle invalid input
+    //TODO: can i use something else instead Switch? (it's ugly and bulky af)
 
 
 

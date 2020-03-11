@@ -11,7 +11,7 @@ public class Main {
     /*
     - The player is in a dungeon full of vampires.
     - The player has to destroy the vampires before his lamp runs out of battery (i.e. number of moves)
-    - The player can see the vampires with a blinking of their lump. after which they have to move blind before the
+    - The player can see the vampires with a blinking of their lamp. after which they have to move blind before the
       following blinking.
     - With one move, the player can walk as many steps he wants.
      */
