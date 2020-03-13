@@ -13,6 +13,7 @@ public class Dungeon {
     private Player player;
     private Scanner reader;
     private ArrayList<Vampire> vampiresSquad;
+    private Direction direction;
 
 
     public Dungeon(int length, int height, int vampires, int moves, boolean vampiresMoves) {
@@ -29,6 +30,7 @@ public class Dungeon {
         for (int i = 0; i < vampires; i++) {     //add 5 vampires to the vampiresSquad
             vampiresSquad.add(new Vampire());
         }
+        direction = new Direction();
     }
 
 
@@ -54,11 +56,15 @@ public class Dungeon {
     }
 
 
+
+
+
     //TODO change method name - it's too long
     public void movePlayerAccordingToCommand(String command) {
         char[] moves = command.toCharArray(); //convert user's command(s) to array of chars (keys);
         for (int i = 0; i < moves.length; i++) { // change Player's coordinates accordingly
-            player.move(moves[i]);
+            Direction dir = new Direction(moves[i]);
+            player.move(dir);
         }
     }
 
@@ -68,13 +74,15 @@ public class Dungeon {
         int counter = 0;
         while (counter < numberOfPlayerMoves) {
             for (Vampire vampire : vampiresSquad) {
-                vampire.move();
+               Direction dir = new Direction();
+               dir = dir.randomDirection();
+               if(vampire.isValidMove(dir, vampiresSquad)){
+                   vampire.move(dir);
+               }
             }
             counter++;
         }
-
     }
-
 
 
     public static int getLength() {
@@ -84,12 +92,7 @@ public class Dungeon {
     public static int getHeight() {
         return height;
     }
-
-    public void moveSquad(ArrayList<Vampire> squad) {  //move each Vampire in random way
-        for (Vampire vampire : squad) {
-            vampire.move();
-        }
-    }
+    
 
 
     //if player and vampire run into each other  - the vampire is destroyed

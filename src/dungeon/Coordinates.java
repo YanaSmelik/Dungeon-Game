@@ -4,15 +4,20 @@ public class Coordinates {
 
     private int x; //horizontal coordinate
     private int y; //vertical coordinate
+    private Direction direction;
 
     public Coordinates() {
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
 
     //constructor for Vampire class
     public Coordinates(int x, int y){
         this.x = x;
         this.y = y;
+        direction = new Direction();
     }
 
 
@@ -34,32 +39,11 @@ public class Coordinates {
     }
 
     //changes coordinates according to movement direction, taking into account map boarders.
-    public void move(char key) {
-        switch (key) {
-            case 'w':
-                if (y > 0) {
-                    y--;
-                }
-                break;
-            case 'd':
-                if(x < Dungeon.getLength()){
-                    x++;
-                }
-                break;
-            case 's':
-                if(y < Dungeon.getHeight()){
-                    y++;
-                }
-                break;
-            case 'a':
-                if(x > 0){
-                    x--;
-                }
-                break;
-        }
+    public void move(Direction direction) {
+        setX(direction.getNewX());
+        setY(direction.getNewY());
     }
-    //TODO handle invalid input
-    //TODO: can i use something else instead Switch? (it's ugly and bulky af)
+
 
 
 

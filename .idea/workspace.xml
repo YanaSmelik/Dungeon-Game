@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9a22f33-2390-4959-ad4c-d7c39ad5165d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/dungeon/Direction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Part 2. Exercise 33 - Dungeon/dungeon/Vampire.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Part 2. Exercise 33 - Dungeon/dungeon/Vampire.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dungeon/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dungeon/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dungeon/Dungeon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dungeon/Dungeon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dungeon/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dungeon/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dungeon/TestCoordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dungeon/TestCoordinates.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dungeon/TestPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dungeon/TestPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dungeon/TestVampire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dungeon/TestVampire.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dungeon/Vampire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dungeon/Vampire.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583765098827</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Changes: &#10;&#10;Dungeon class: &#10; - separated vampireMove from playerMove method; &#10; - now it's moveVampireAccordingToPlayerMoves (int numberOfPlayerMoves) and movePlayerAccordingToCommand();&#10; - added method destroyVampire()  -&gt; it destroys vampire if player runs into him.&#10; &#10; &#10; Coordinates class: &#10;   - added setters for x and y  -&gt; temporarily; &#10;   &#10;TestCoordinates class: &#10;  - added tests for moves inside the map and cases when coordinates exceed boundaries; &#10;&#10;&#10;TestPlayer class: &#10;  - added tests for moves inside the map and cases when player's coordinates exceed boundaries">
+      <created>1583952684143</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1583952684143</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -182,17 +189,18 @@
     <MESSAGE value="Implemented Coordinates class (instead of Moves interface): &#10; - it has x and y coordinates int variables;&#10; - default constructor (Player has 0,0 as initial Coordinates, so it's okay for now) &#10; - getters and setters for x and y;&#10; - move() method  --&gt; moved it to the Coordinates class (parent class), Player and Vampire can implement and override or overload it. &#10; - coordinatesToString()  --&gt; also moved this method into parent class, to be able to override it in the child classes. &#10; &#10; &#10; Player class (extends Coordinates): &#10;   - removed x and y variables ( they are now in parent - Coordinates class) &#10;   - move() method is now overrode from parent class &#10;   - coordinatesToString()  --&gt; also overrode from parent class &#10;   &#10;   &#10; Vampire class (extends Coordinates): &#10;   - constructor sets x and y variables with the help of randomCoordinate() method;&#10;   - move() overloaded(?) from prent class; &#10;   - coordinatesToString() --&gt; overrode from parent class.  &#10;   &#10;   &#10; TestPlayer: &#10;   - added moveS, moveW, moveA, moveD tests; &#10;   - added coordinatesToString() test;" />
     <MESSAGE value="Dungeon class: &#10;  - added ArrayList of vampires to the class variables;&#10;  - in constructor initiated ArrayList and added 5 new Vampires to it. &#10;  - created printPlayersCoordinates and printVampiresCoordinates method to print P and Vs coordinates (with println() inside lower methods).&#10;  - edited movePlayerAccordingToCommand() method to support vampiresSquad ArrayList (instead of one vampire). &#10;  - added moveSquad() method  --&gt; it's move method for the collection of Vampires. &#10;  - renamed printCurrentFieldSituation() to printCurrentMap() and edited it to support Vampires ArrayList (not only one vampire) &#10;  - implemented doCoordinateMath() --&gt; helper method for printCurrentMap(). It returns 'true' if a vampire's coordinates match current. &#10;  &#10;  &#10;Created TestCoordinates class: &#10; - tests for moveS, moveW, moveA, moveD &#10; - and test for coordinatesToString()" />
     <MESSAGE value="Changes: &#10;&#10;Dungeon class: &#10;  - length and height class variables are not public static --&gt; to make them accesible from the Coordinates class. &#10;  - refactored movePlayerAccordingToCommand()  --&gt; deleted separate size specification for the new moves array. It's redundant. &#10;  &#10;Vampire class: &#10;  - modified class constructor  --&gt; now it doesn't create additional instance of Coordinates object. &#10;  - the initial x and y coordinates (random) are now set during the calling of super constructor. Whit the help of ThreadLocalRandom.current().nextInt(), which takes into account height and width of the map. Thus, randomCoordinate() method become unnecessary. &#10;  &#10;&#10;Coordinates class: &#10;   - added constructor that takes (int x, int y) parameters --&gt; to make possible for Vampire set random coordinates; &#10;   - modified move() --&gt; to take into account map boundaries." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes: &#10;&#10;Dungeon class: &#10;  - length and height class variables are not public static --&gt; to make them accesible from the Coordinates class. &#10;  - refactored movePlayerAccordingToCommand()  --&gt; deleted separate size specification for the new moves array. It's redundant. &#10;  &#10;Vampire class: &#10;  - modified class constructor  --&gt; now it doesn't create additional instance of Coordinates object. &#10;  - the initial x and y coordinates (random) are now set during the calling of super constructor. Whit the help of ThreadLocalRandom.current().nextInt(), which takes into account height and width of the map. Thus, randomCoordinate() method become unnecessary. &#10;  &#10;&#10;Coordinates class: &#10;   - added constructor that takes (int x, int y) parameters --&gt; to make possible for Vampire set random coordinates; &#10;   - modified move() --&gt; to take into account map boundaries." />
+    <MESSAGE value="Changes: &#10;&#10;Dungeon class: &#10; - separated vampireMove from playerMove method; &#10; - now it's moveVampireAccordingToPlayerMoves (int numberOfPlayerMoves) and movePlayerAccordingToCommand();&#10; - added method destroyVampire()  -&gt; it destroys vampire if player runs into him.&#10; &#10; &#10; Coordinates class: &#10;   - added setters for x and y  -&gt; temporarily; &#10;   &#10;TestCoordinates class: &#10;  - added tests for moves inside the map and cases when coordinates exceed boundaries; &#10;&#10;&#10;TestPlayer class: &#10;  - added tests for moves inside the map and cases when player's coordinates exceed boundaries" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes: &#10;&#10;Dungeon class: &#10; - separated vampireMove from playerMove method; &#10; - now it's moveVampireAccordingToPlayerMoves (int numberOfPlayerMoves) and movePlayerAccordingToCommand();&#10; - added method destroyVampire()  -&gt; it destroys vampire if player runs into him.&#10; &#10; &#10; Coordinates class: &#10;   - added setters for x and y  -&gt; temporarily; &#10;   &#10;TestCoordinates class: &#10;  - added tests for moves inside the map and cases when coordinates exceed boundaries; &#10;&#10;&#10;TestPlayer class: &#10;  - added tests for moves inside the map and cases when player's coordinates exceed boundaries" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="238" width="816" height="729" key="#Intentions" timestamp="1583682386926">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="552" y="238" width="816" height="729" key="#Intentions/0.0.1920.1160@0.0.1920.1160" timestamp="1583682386926" />
-    <state x="765" y="281" key="#com.intellij.ide.util.MemberChooser" timestamp="1583950647031">
+    <state x="765" y="281" key="#com.intellij.ide.util.MemberChooser" timestamp="1584124648924">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="765" y="281" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1160@0.0.1920.1160" timestamp="1583950647031" />
+    <state x="765" y="281" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1160@0.0.1920.1160" timestamp="1584124648924" />
     <state x="790" y="273" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1583587382723">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
@@ -209,10 +217,10 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="690" y="334" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1920.1160@0.0.1920.1160" timestamp="1583587385158" />
-    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1583952560396">
+    <state x="0" y="0" key="CommitChangelistDialog2" timestamp="1583952683076">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1920.1160@0.0.1920.1160" timestamp="1583952560396" />
+    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1920.1160@0.0.1920.1160" timestamp="1583952683076" />
     <state x="714" y="295" key="DetectedRootsChooserDialog" timestamp="1583587079042">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
@@ -225,42 +233,46 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="740" y="334" key="FileChooserDialogImpl/0.0.1920.1160@0.0.1920.1160" timestamp="1583587380093" />
-    <state width="1877" height="575" key="GridCell.Tab.0.bottom" timestamp="1583949543486">
+    <state width="1877" height="575" key="GridCell.Tab.0.bottom" timestamp="1584126273207">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="575" key="GridCell.Tab.0.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1583949543486" />
-    <state width="1877" height="575" key="GridCell.Tab.0.center" timestamp="1583949543486">
+    <state width="1877" height="575" key="GridCell.Tab.0.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1584126273207" />
+    <state width="1877" height="575" key="GridCell.Tab.0.center" timestamp="1584126273207">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="575" key="GridCell.Tab.0.center/0.0.1920.1160@0.0.1920.1160" timestamp="1583949543486" />
-    <state width="1877" height="575" key="GridCell.Tab.0.left" timestamp="1583949543486">
+    <state width="1877" height="575" key="GridCell.Tab.0.center/0.0.1920.1160@0.0.1920.1160" timestamp="1584126273207" />
+    <state width="1877" height="575" key="GridCell.Tab.0.left" timestamp="1584126273207">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="575" key="GridCell.Tab.0.left/0.0.1920.1160@0.0.1920.1160" timestamp="1583949543486" />
-    <state width="1877" height="575" key="GridCell.Tab.0.right" timestamp="1583949543486">
+    <state width="1877" height="575" key="GridCell.Tab.0.left/0.0.1920.1160@0.0.1920.1160" timestamp="1584126273207" />
+    <state width="1877" height="575" key="GridCell.Tab.0.right" timestamp="1584126273207">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="575" key="GridCell.Tab.0.right/0.0.1920.1160@0.0.1920.1160" timestamp="1583949543486" />
-    <state width="1877" height="396" key="GridCell.Tab.1.bottom" timestamp="1583948944807">
+    <state width="1877" height="575" key="GridCell.Tab.0.right/0.0.1920.1160@0.0.1920.1160" timestamp="1584126273207" />
+    <state width="1877" height="396" key="GridCell.Tab.1.bottom" timestamp="1584126174369">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="396" key="GridCell.Tab.1.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1583948944807" />
-    <state width="1877" height="396" key="GridCell.Tab.1.center" timestamp="1583948944807">
+    <state width="1877" height="396" key="GridCell.Tab.1.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1584126174369" />
+    <state width="1877" height="396" key="GridCell.Tab.1.center" timestamp="1584126174369">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="396" key="GridCell.Tab.1.center/0.0.1920.1160@0.0.1920.1160" timestamp="1583948944807" />
-    <state width="1877" height="396" key="GridCell.Tab.1.left" timestamp="1583948944807">
+    <state width="1877" height="396" key="GridCell.Tab.1.center/0.0.1920.1160@0.0.1920.1160" timestamp="1584126174369" />
+    <state width="1877" height="396" key="GridCell.Tab.1.left" timestamp="1584126174369">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="396" key="GridCell.Tab.1.left/0.0.1920.1160@0.0.1920.1160" timestamp="1583948944807" />
-    <state width="1877" height="396" key="GridCell.Tab.1.right" timestamp="1583948944807">
+    <state width="1877" height="396" key="GridCell.Tab.1.left/0.0.1920.1160@0.0.1920.1160" timestamp="1584126174369" />
+    <state width="1877" height="396" key="GridCell.Tab.1.right" timestamp="1584126174369">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="396" key="GridCell.Tab.1.right/0.0.1920.1160@0.0.1920.1160" timestamp="1583948944807" />
+    <state width="1877" height="396" key="GridCell.Tab.1.right/0.0.1920.1160@0.0.1920.1160" timestamp="1584126174369" />
     <state x="440" y="154" key="SettingsEditor" timestamp="1583588014329">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="440" y="154" key="SettingsEditor/0.0.1920.1160@0.0.1920.1160" timestamp="1583588014329" />
+    <state x="655" y="404" key="com.intellij.ide.util.TipDialog" timestamp="1584099676913">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="655" y="404" key="com.intellij.ide.util.TipDialog/0.0.1920.1160@0.0.1920.1160" timestamp="1584099676913" />
     <state x="664" y="473" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1583587926603">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
@@ -274,9 +286,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/dungeon/TestVampire.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="25" />
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>5</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

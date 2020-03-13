@@ -11,7 +11,7 @@ public class TestPlayer {
     // *********** move() *********** //
     // Out of bounds (upper, bottom, left, right)
 
-    @Test
+   /* @Test
     void playerMoveOutOfUpperBound() {
         Player player = new Player();
         Dungeon dungeon = new Dungeon(5, 5, 5, 5, true);
@@ -111,6 +111,6 @@ public class TestPlayer {
     void coordinatesToString() {
         Player player = new Player();
         assertEquals("P: 0,0", player.coordinatesToString());
-    }
+    }*/
 }
 

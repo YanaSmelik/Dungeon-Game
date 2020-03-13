@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestCoordinates {
 
 
-    // *********** move() *********** //
+  /* // *********** move() *********** //
     // Out of bounds (upper, bottom, left, right)
     @Test
     void moveOutOfUpperBound() {
@@ -103,7 +103,7 @@ public class TestCoordinates {
         assertEquals("0,0", coordinates.coordinatesToString());
     }
 
-
+*/
 
     //TODO write tests for invalid input (throw exceptions)
 

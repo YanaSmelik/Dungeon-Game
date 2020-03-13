@@ -9,8 +9,8 @@ public class Player extends Coordinates {
 
 
     @Override
-    public void move(char key) {
-        super.move(key);
+    public void move(Direction direction) {
+        super.move(direction.moveInDirection(direction.getDir()));
     }
 
     @Override

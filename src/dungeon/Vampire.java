@@ -1,9 +1,10 @@
 package dungeon;
 
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Vampire extends Coordinates {
+public class Vampire extends Coordinates{
 
     private Coordinates coordinates;
     /*
@@ -16,24 +17,34 @@ public class Vampire extends Coordinates {
 
     public Vampire() {
         //set x and y as random numbers (considering height and length).
-        super(ThreadLocalRandom.current().nextInt(Dungeon.getLength()), ThreadLocalRandom.current().nextInt(Dungeon.getHeight()));
+        super(ThreadLocalRandom.current().nextInt(Dungeon.getLength()),
+                ThreadLocalRandom.current().nextInt(Dungeon.getHeight()));
     }
 
 
     public void move() {
-        char key = randomMove();
-        super.move(key);
+        super.move(getDirection());
     }
 
 
     //random move for move() method
-    private char randomMove() {
+    private char randomMoveDirection() {
         char[] possibleMoves = {'w', 's', 'd', 'a'};
-        return  possibleMoves[ThreadLocalRandom.current().nextInt(4)];
+        return possibleMoves[ThreadLocalRandom.current().nextInt(4)];
     }
 
+
+    public boolean isValidMove(Direction direction, ArrayList<Vampire> vampireSquad) {
+        for (Vampire vampire : vampireSquad) {
+            if (direction.getNewX() == vampire.getX() && direction.getNewY() == vampire.getY()) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public String coordinatesToString() {
         return "V: " + super.coordinatesToString();
     }
+
 }
