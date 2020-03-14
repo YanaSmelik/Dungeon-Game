@@ -1,6 +1,5 @@
 package dungeon;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,75 +11,66 @@ public class Dungeon {
     private boolean vampiresMove;
     private Player player;
     private Scanner reader;
-    private ArrayList<Vampire> vampiresSquad;
-    private Direction direction;
+    private ArrayList<Vampire> vampires;
 
 
     public Dungeon(int length, int height, int vampires, int moves, boolean vampiresMoves) {
-
-        // TODO change count length and height from 1 (not from 0);
-
         this.length = length;  // length and height - represent the dimension of the dungeon (always a rectangle);
         this.height = height;
         this.moves = moves;  // moves - determines the initial number of moves
         this.vampiresMove = vampiresMoves; //if vampiresMoves is false --> the vampires do not move
-        this.player = new Player();
+        this.player = new Player();  // game has only one player
         this.reader = new Scanner(System.in); //create one scanner object that will be used multiple times throughout the program
-        vampiresSquad = new ArrayList<>(vampires);
-        for (int i = 0; i < vampires; i++) {     //add 5 vampires to the vampiresSquad
-            vampiresSquad.add(new Vampire());
+        this.vampires = new ArrayList<Vampire>(vampires);
+        for (int i = 0; i < vampires; i++) {     //add  vampires to the List
+            this.vampires.add(new Vampire());
         }
-        direction = new Direction();
     }
 
 
     //starts the game
     public void run() {
-        while (moves >= 0) {
-
-            //TODO handle case when vampire and Player are both at 0,0 at the beginning
-            printPlayersCoordinates(); //print P coordinates;
-            printVampiresCoordinates();//print V coordinates;
-            printCurrentMap();                       //print field
+        checkInitialPositions(); //check that there's no vampire at 0,0. And all vampires have different coordinates.
+        while (moves >= 0) {  //loop while user has moves
+            printPlayersCoordinates();
+            printVampiresCoordinates();
+            printCurrentMap();         //print field
             System.out.println("Moves left: " + moves);  //how many moves left
-
-            System.out.print("Your move(s): ");             //ask user for input (command(s))
+            System.out.print("Your move(s): ");   //ask user for input (command(s))
             String command = reader.nextLine();
-
-            movePlayerAccordingToCommand(command); //move player
-            destroyVampire();          //destroy vampire if player run into him.
-            moveVampireAccordingToPlayerMoves(command.length());
-
+            playerMove(command);  //move player
+            destroyVampire();    //destroy vampires if player run into them
+            if (vampiresMove) {  //move vampires if it's allowed
+                vampiresMove(command.length());  //move each vampire as many times as Player has moved
+            }
+            if (vampires.size() == 0) {  //if vampires are all destroyed  - player won
+                System.out.println("\nYOU WON!");
+                break;
+            }
+            if (moves == 0) { //if player run out of moves, but there are still vampires - he lost
+                System.out.println("\nYOU LOST!\n" +
+                        "GAME OVER.");
+            }
             moves--;
         }
     }
 
 
-
-
-
-    //TODO change method name - it's too long
-    public void movePlayerAccordingToCommand(String command) {
+    public void playerMove(String command) {
         char[] moves = command.toCharArray(); //convert user's command(s) to array of chars (keys);
         for (int i = 0; i < moves.length; i++) { // change Player's coordinates accordingly
-            Direction dir = new Direction(moves[i]);
-            player.move(dir);
+            player.move(moves[i]);
         }
     }
 
 
-    //TODO change method name - it's too long
-    public void moveVampireAccordingToPlayerMoves(int numberOfPlayerMoves) {
-        int counter = 0;
-        while (counter < numberOfPlayerMoves) {
-            for (Vampire vampire : vampiresSquad) {
-               Direction dir = new Direction();
-               dir = dir.randomDirection();
-               if(vampire.isValidMove(dir, vampiresSquad)){
-                   vampire.move(dir);
-               }
+    //move all vampires
+    public void vampiresMove(int numberOfPlayerMoves) {
+        while (numberOfPlayerMoves >= 0) {
+            for (Vampire vampire : vampires) {
+                vampire.move(vampires);
+                numberOfPlayerMoves--;
             }
-            counter++;
         }
     }
 
@@ -92,23 +82,23 @@ public class Dungeon {
     public static int getHeight() {
         return height;
     }
-    
 
 
     //if player and vampire run into each other  - the vampire is destroyed
     public void destroyVampire() {
         ArrayList<Vampire> vampireToRemove = new ArrayList<>();
-        for (Vampire vampire : vampiresSquad) {
+        for (Vampire vampire : vampires) {
             if (player.getX() == vampire.getX() && player.getY() == vampire.getY()) {
                 vampireToRemove.add(vampire);
             }
         }
-        vampiresSquad.removeAll(vampireToRemove);
+        vampires.removeAll(vampireToRemove);
     }
 
 
-    public void printVampiresCoordinates() {    //prints coordinates of all vampires
-        for (Vampire vampire : vampiresSquad) {
+    //prints coordinates of all vampires
+    public void printVampiresCoordinates() {
+        for (Vampire vampire : vampires) {
             System.out.println(vampire.coordinatesToString());
         }
     }
@@ -118,8 +108,19 @@ public class Dungeon {
         System.out.println(player.coordinatesToString());
     }
 
+    //vampires are shuffled until no one of them is at 0,0 or takes the same place with other vampire
+    public void checkInitialPositions() {
+        for (Vampire vampire : vampires) {
+            while ((vampire.getX() == 0 && vampire.getX() == 0) ||
+                    !vampire.isFreeSpot(vampires)) {
+                vampire.move(vampires);
+            }
+        }
+    }
 
-    public void printCurrentMap() {   //prints player's position on the field
+
+    //prints player's position on the field
+    public void printCurrentMap() {
         for (int i = 0; i <= height; i++) {
             for (int j = 0; j <= length; j++) {
                 if (i == player.getY() && j == player.getX()) {
@@ -135,8 +136,9 @@ public class Dungeon {
     }
 
 
+    //helper method for printing vampires on Map
     public boolean doCoordinatesMatch(int x, int y) {
-        for (Vampire vampire : vampiresSquad) {
+        for (Vampire vampire : vampires) {
             if (vampire.getX() == x && vampire.getY() == y) {
                 return true;
             }

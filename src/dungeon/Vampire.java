@@ -1,12 +1,13 @@
 package dungeon;
-
-
-import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Vampire extends Coordinates{
+public class Vampire {
 
-    private Coordinates coordinates;
+    private int x;
+    private int y;
+    private int predictedX;
+    private int predictedY;
     /*
      - the vampires move randomly in the game
     - vampires take one step for each step the player takes
@@ -16,14 +17,36 @@ public class Vampire extends Coordinates{
      */
 
     public Vampire() {
-        //set x and y as random numbers (considering height and length).
-        super(ThreadLocalRandom.current().nextInt(Dungeon.getLength()),
-                ThreadLocalRandom.current().nextInt(Dungeon.getHeight()));
+        x = ThreadLocalRandom.current().nextInt(Dungeon.getLength()); //sets vampires randomly on a map
+        y = ThreadLocalRandom.current().nextInt(Dungeon.getHeight());
+        predictedX = x;
+        predictedY = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
 
-    public void move() {
-        super.move(getDirection());
+    //moves vampire taking into consideration map boundaries and free spots (placements of other vampires)
+    public void move(List<Vampire> vampires) {
+        predictMoveInDirection(randomMoveDirection());
+        if(isInBounds() && isFreeSpot(vampires)){
+            setX(predictedX);
+            setY(predictedY);
+        }
     }
 
 
@@ -34,17 +57,51 @@ public class Vampire extends Coordinates{
     }
 
 
-    public boolean isValidMove(Direction direction, ArrayList<Vampire> vampireSquad) {
+    //predict vampires move in the direction
+    public void predictMoveInDirection(char direction) {
+        predictedX = getX();
+        predictedY = getY();
+        switch (direction) {
+            case 'a':
+                predictedX--;
+                break;
+            case 'd':
+                predictedX++;
+                break;
+            case 's':
+                predictedY++;
+                break;
+            case 'w':
+                predictedY--;
+                break;
+        }
+    }
+
+
+    //verifies move validity considering field size
+    private boolean isInBounds() {
+        if(predictedX <= Dungeon.getLength() && predictedX >= 0 && predictedY <= Dungeon.getHeight() && predictedY >=0){
+            return true;
+        }
+        return false;
+    }
+
+
+    //verified that if vampire moves, he won't take other vampire's place
+    public boolean isFreeSpot(List<Vampire> vampireSquad){
         for (Vampire vampire : vampireSquad) {
-            if (direction.getNewX() == vampire.getX() && direction.getNewY() == vampire.getY()) {
+            if (predictedX == vampire.getX() && predictedY == vampire.getY()) {
                 return false;
             }
         }
         return true;
     }
 
+
+
+
     public String coordinatesToString() {
-        return "V: " + super.coordinatesToString();
+        return "V: " + getX() + ", " + getY();
     }
 
 }
